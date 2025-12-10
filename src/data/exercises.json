@@ -1,0 +1,146 @@
+{
+    "Weight loss": {
+        "Beginner": [
+            {
+                "name": "Walking",
+                "sets": "30 min",
+                "equipment": "None"
+            },
+            {
+                "name": "Bodyweight Squats",
+                "sets": "3x15",
+                "equipment": "None"
+            },
+            {
+                "name": "Light Cycling",
+                "sets": "20 min",
+                "equipment": "Bike"
+            }
+        ],
+        "Intermediate": [
+            {
+                "name": "Running",
+                "sets": "30 min",
+                "equipment": "Shoes"
+            },
+            {
+                "name": "HIIT Circuit",
+                "sets": "4 rounds",
+                "equipment": "Mat"
+            },
+            {
+                "name": "Push-ups",
+                "sets": "3x12",
+                "equipment": "None"
+            }
+        ],
+        "Advanced": [
+            {
+                "name": "HIIT Sprints",
+                "sets": "6 rounds",
+                "equipment": "Track"
+            },
+            {
+                "name": "Burpees",
+                "sets": "3x20",
+                "equipment": "None"
+            },
+            {
+                "name": "CrossFit Circuit",
+                "sets": "5 rounds",
+                "equipment": "Gym"
+            }
+        ]
+    },
+    "Muscle gain": {
+        "Beginner": [
+            {
+                "name": "Push-ups",
+                "sets": "3x10",
+                "equipment": "None"
+            },
+            {
+                "name": "Squats",
+                "sets": "3x12",
+                "equipment": "None"
+            },
+            {
+                "name": "Plank",
+                "sets": "3x30 sec",
+                "equipment": "Mat"
+            }
+        ],
+        "Intermediate": [
+            {
+                "name": "Bench Press",
+                "sets": "4x8",
+                "equipment": "Bench"
+            },
+            {
+                "name": "Deadlift",
+                "sets": "4x6",
+                "equipment": "Barbell"
+            },
+            {
+                "name": "Pull-ups",
+                "sets": "3x10",
+                "equipment": "Bar"
+            }
+        ],
+        "Advanced": [
+            {
+                "name": "Squats",
+                "sets": "5x5",
+                "equipment": "Barbell"
+            },
+            {
+                "name": "Deadlift",
+                "sets": "5x5",
+                "equipment": "Barbell"
+            },
+            {
+                "name": "Overhead Press",
+                "sets": "4x6",
+                "equipment": "Barbell"
+            }
+        ]
+    },
+    "Endurance": {
+        "Beginner": [
+            {
+                "name": "Jogging",
+                "sets": "20 min",
+                "equipment": "Shoes"
+            },
+            {
+                "name": "Cycling",
+                "sets": "30 min",
+                "equipment": "Bike"
+            }
+        ],
+        "Intermediate": [
+            {
+                "name": "Interval Running",
+                "sets": "6x3 min",
+                "equipment": "Shoes"
+            },
+            {
+                "name": "Rowing",
+                "sets": "25 min",
+                "equipment": "Machine"
+            }
+        ],
+        "Advanced": [
+            {
+                "name": "Triathlon Mix",
+                "sets": "Swim 30 min, Bike 40 min, Run 30 min",
+                "equipment": "Full gear"
+            },
+            {
+                "name": "Hill Sprints",
+                "sets": "10x",
+                "equipment": "Shoes"
+            }
+        ]
+    }
+}
