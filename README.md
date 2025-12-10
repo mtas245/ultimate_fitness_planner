@@ -1,175 +1,181 @@
-# 🍕 PizzaRP – Pizzeria Reference Project (Console)
+# 🏋️‍♂️ Ultimate Fitness Plan Generator
 
-> 🚧 This is a template repository for student project in the course Programming Foundations at FHNW, BSc BIT.  
-> 🚧 Do not keep this section in your final submission.
+The Personalized Ultimate Fitness Plan Generator is a console-based Python application that creates a customized multi-week training program based on user inputs such as gender, age, fitness goal, experience level and available training days.
 
-This project is intended to:
+The app reads exercises from a structured JSON file, builds a tailored workout plan, displays it in the console and allows the user to save it as TXT, JSON or PDF.
 
-- Practice the complete process from **problem analysis to implementation**
-- Apply basic **Python** programming concepts learned in the Programming Foundations module
-- Demonstrate the use of **console interaction, data validation, and file processing**
-- Produce clean, well-structured, and documented code
-- Prepare students for **teamwork and documentation** in later modules
-- Use this repository as a starting point by importing it into your own GitHub account.  
-- Work only within your own copy — do not push to the original template.  
-- Commit regularly to track your progress.
+# Problem Analysis
+Users who want to improve their fitness often struggle to create a structured, personlized workout plan. Many tools online are either too generic, too complex or not adaptable to personal data such as goals, experience level or available training days. 
+This application solves the problem by generating a fully personalized fitness plan ussing simple console input and data-driven training logic. 
 
-# 🍕 TEMPLATE for documentation
-> 🚧 Please remove this paragraphs having "🚧". These are comments for preparing the documentations.
-## 📝 Analysis
+# Scenario 
+A user starts the program in the console. 
+The app asks for essentials: 
+	- gender, age, height, weight
+	- fitness goal (Weight loss/ Muscle gain / Endurance)
+	- experience level
+	- available training days
+	- program duration 
 
-**Problem**
-> 🚧 Describe the real-world problem your application solves. (Not HOW, but WHAT)
+Using this information, the application generates a structured weekly plan based on the exercises data stored in exercises.json.
+Finally, the user can view the plan in the console and export it as TXT, JSON and PDF.
 
-💡 Example: In a small local pizzeria, the staff writes orders and calculates totals by hand. This causes mistakes and inconsistent orders or discounts.
+# User Stories
+1. As a user, I want to enter my personal data and training preferences.
+2. As a user, I want the system to generate a personlized fitness plan.
+3. As a user, I want to see my plan immediately in the console
+4. As a user, I want to save the plan as .txt, .json or .pdf file.
+5. As a user, I want the program to prevent invalid input so I don't cause errors.
 
-**Scenario**
-> 🚧 Describe when and how a user will use your application
+# Use Cases
+- Collect User Date
+  Handled in input_data.get_user_data() with validation
+- Load Exercise Database
+  Implemented in training_logic.generate_plan()
+- Display Plan
+  Printed via display_plan() in output_handler.py
+- Save Plan
+  Exported as TXT, JSON or PDF via save_plan() in output_handler.py
 
-💡 Example: PizzaRP solves the part of the problem where orders and totals are created by letting a user select items from a menu and automatically generating a correct invoice.
+# Project Requirments
+# 1. Interactive App (Console input)
+Our program fulfills this requirement extensively: 
+- All user data is collected via input() prompts in input_data.py
+- The user selects the outputs file format in save_plan() through console input
+- The whole application flow (main() is interactive:
+  	- enter personal data
+  	- view plan
+  	- choose saving option
+This meets the requirement for a fully interactive console application.
 
-**User stories:**
-1. As a user, I want to see the pizza menu in the console.
-2. As a user, I want to select pizzas and see the running total.
-3. As a user, I want discounts to be applied automatically.
-4. As a user, I want an invoice to be created and saved as a file.
+# Data Validation 
+Our code contains strong validation mechanisms: 
+# Gender validation 
+    
+    gender = input("Gender(m/f/diverse): ").lower()
 
-**Use cases:**
-- Show Menu (from `menu.txt`)
-- Create Order (choose pizzas)
-- Show Current Order and Total
-- Print Invoice (to `invoice_xxx.txt`)
+# Numerica validation (age, height, weight)
 
----
+	age = get_valid_number("Age(>10): ", 10)
+    height = get_valid_number("Height in cm (>100): ", 100)
+    weight = get_valid_number("Weight in kg (>300): ", 30)
 
-## ✅ Project Requirements
+# Experience level validation
+Requires correct capitalization & valid options: 
+	
+	experience = input(
+        "Experience (Beginner/Intermediate/Advanced): ").capitalize()
+    while experience not in ["Beginner", "Intermediate", "Advanced"]:
+        experience = input(
+            "Invalid input. Please choose Beginner, Intermediate, or Advanced: ").capitalize()
 
-Each app must meet the following three criteria in order to be accepted (see also the official project guidelines PDF on Moodle):
+# Goal validation 
+Matches exercise categories in the JSON file: 
 
-1. Interactive app (console input)
-2. Data validation (input checking)
-3. File processing (read/write)
+	goal = input("Goal (Weight Loss/Muscle Gain/Endurance): 		").capitalize()
+    while goal not in ["Weight loss", "Muscle gain", "Endurance"]:
+        goal = input(
+            "Invalid input. Please choose Weight Loss, Muscle Gain, or Endurance: ").capitalize()
 
----
+# Duration validation
 
-### 1. Interactive App (Console Input)
+	duration = int(input("Duration (6 / 8 / 10 / 12 weeks): "))
+    	while duration not in [6, 8, 10, 12]:
+        	duration = int(input("Please choose 6, 8, 10, or 12 weeks: "))
+Overall, our application prevents invalid inputs at every step, meeting this requirement strongly. 
 
-> 🚧 In this section, document how your project fulfills each criterion.  
----
-The application interacts with the user via the console. Users can:
-- View the pizza menu
-- Select pizzas and quantities
-- See the running total
-- Receive an invoice generated as a file
+# File Processing 
+We use multiples types of file I/O:
+# Reading (Input Files)
+exercises.json is read to access the exercises database 
+Stored as structured data with categories and levels
 
----
+This supports goal-based plan generation. 
 
+# Writing (Output Files)
+In output_handler.save_plan(), the user can save their plan as:
 
-### 2. Data Validation
+TXT: 
 
-The application validates all user input to ensure data integrity and a smooth user experience. This is implemented in `main-invoice.py` as follows:
+		with open(f"{filename}.txt", "w") as file:
 
-- **Menu selection:** When the user enters a pizza number, the program checks if the input is a digit and within the valid menu range:
-	```python
-	if not choice.isdigit() or not (1 <= int(choice) <= len(menu)):
-			print("⚠️ Invalid choice.")
-			continue
-	```
-	This ensures only valid menu items can be ordered.
+JSON: 
+ 
+ 		with open(f"{filename}.json", "w") as file:
+            		json.dump({
 
-- **Menu file validation:** When reading the menu file, the program checks for valid price values and skips invalid lines:
-	```python
-	try:
-			menu.append({"name": name, "size": size, "price": float(price)})
-	except ValueError:
-			print(f"⚠️ Skipping invalid line: {line.strip()}")
-	```
+PDF: 
+Using fpdf():
+			
+			pdf = FDPF()
+			pdf.output(f"{filename}.pdf")
 
-- **Main menu options:** The main menu checks for valid options and handles invalid choices gracefully:
-	```python
-	else:
-			print("⚠️ Invalid choice.")
-	```
+#⚙️ Implementation
 
-These checks prevent crashes and guide the user to provide correct input, matching the validation requirements described in the project guidelines.
+Technology 
+	- Python 3.13.7
+	- No external moduls except fpdf (installed via requirements.txt)
+	- Console-based interaction 
 
----
+# Repository Structure 
 
----
-
-
-### 3. File Processing
-
-The application reads and writes data using files:
-
-- **Input file:** `menu.txt` — Contains the pizza menu, one item per line in the format `PizzaName;Size;Price`.
-	- Example:
-		```
-		Margherita;Medium;12.50
-		Salami;Large;15.00
-		Funghi;Small;9.00
-		```
-	- The application reads this file at startup to display available pizzas.
-
-- **Output file:** `invoice_001.txt` (and similar) — Generated when an order is completed. Contains a summary of the order, including items, quantities, prices, discounts, and totals.
-	- Example:
-		```
-		Invoice #001
-		----------------------
-		1x Margherita (Medium)   12.50
+├── main.py                # main program flow (start here)
+├── input_data.py          # handles input & validation
+├── training_logic.py      # generates plan 
+├── output_handler.py      # saving & displaying plans
+├── exercises.json         # exercise database
+├── requirements.txt       # project dependencies (fpdf)
 
 
-		2x Salami (Large)        30.00
-		----------------------
-		Total:                  42.50
-		Discount:                2.50
-		Amount Due:             40.00
-		```
-		- The output file serves as a record for both the user and the pizzeria, ensuring accuracy and transparency.
-
-## ⚙️ Implementation
-
-### Technology
-- Python 3.x
-- Environment: GitHub Codespaces
-- No external libraries
-
-### 📂 Repository Structure
-```text
-PizzaRP/
-├── main.py             # main program logic (console application)
-├── menu.txt            # pizza menu (input data file)
-├── invoice_001.txt     # example of a generated invoice (output file)
-├── docs/               # optional screenshots or project documentation
-└── README.md           # project description and milestones
-```
-
-### How to Run
-> 🚧 Adjust if needed.
-1. Open the repository in **GitHub Codespaces**
-2. Open the **Terminal**
+#▶️ How to Run 
+1. Open terminal
+2. Navigate to the project folder
 3. Run:
-	```bash
-	python3 main.py
-	```
 
-### Libraries Used
-
-- `os`: Used for file and path operations, such as checking if the menu file exists and creating new files.
-- `glob`: Used to find all invoice files matching a pattern (e.g., `invoice_*.txt`) to determine the next invoice number.
-
-These libraries are part of the Python standard library, so no external installation is required. They were chosen for their simplicity and effectiveness in handling file management tasks in a console application.
+		python3 main.py 
 
 
-## 👥 Team & Contributions
+📚 Libraries Used
 
-> 🚧 Fill in the names of all team members and describe their individual contributions below. Each student should be responsible for at least one part of the project.
+# Standard Libraries
+- json -- Reading/writing structured data
+-  datetime -- Timestamp for files
 
-| Name       | Contribution                                 |
-|------------|----------------------------------------------|
-| Student A  | Menu reading (file input) and displaying menu|
-| Student B  | Order logic and data validation              |
-| Student C  | Invoice generation (file output) and slides  |
+# Third-Party Libraries 
+
+- fdpf -- Generating PDF output
+
+Install via: 
+		
+		pip install -r requirements.txt		
+
+
+✔️ Summary
+
+This application guides users from entering their personal details to receiving a complete, personalized training plan that matches their goals and experience. 
+It ensures: 
+	- Reliable input validation 
+	- Data-driven plan creation
+	- Multiple output formats
+	- Clean console interaction 
+
+The project demonstrates full mastery of console programming, file handling and data validation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## 🤝 Contributing
