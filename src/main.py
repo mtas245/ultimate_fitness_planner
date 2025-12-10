@@ -1,6 +1,8 @@
 # Main program for the Fitness Plan Generator.
 # Controls the full process: input, logic and output.
 
+# This is the main file to start the program
+
 from input_data import get_user_data
 from training_logic import generate_plan
 from output_handler import save_plan, display_plan
