@@ -25,7 +25,7 @@ def save_plan(user_data, plan):
     """
     Saves the plan in the chosen format (TXT, JSON, PDF).
     """
-    filename = f"plan_{user_data['goal'].replace('','')}_{user_data['experience']}"
+    filename = f"plan_{user_data['goal'].replace(' ',' ')}_{user_data['experience']}"
     print("\nChoose a file format:")
     print("1 = Text (.txt)")
     print("2 = JSON (.json)")

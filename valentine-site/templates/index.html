@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine  💘 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #ff99cc, #ff4d88);
+            overflow: hidden;
+            color: white;
+
+        }
+
+        h1 {
+            margin-top: 100px;
+            font-size: 28px;
+            padding: 20px;
+        }
+
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 15px;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background-color: #ffffff;
+            color: #ff4d88;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #444;
+            color: white;
+            position: absolute;
+        }
+
+        #response {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        /* 🌹 Falling roses */
+        .rose {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>{{ name }}, will you be my Valentine? 💖</h1>
+
+<button id="yesBtn" onclick="sayYes()">Yes 💕</button>
+<button id="noBtn" onmouseover="moveButton()">No 😢</button>
+
+<h2 id="response"></h2>
+
+<script>
+    // 🌹 Animated roses
+    function createRose() {
+        const rose = document.createElement("div");
+        rose.classList.add("rose");
+        rose.innerHTML = "🌹";
+        rose.style.left = Math.random() * 100 + "vw";
+        rose.style.animationDuration = (3 + Math.random() * 5) + "s";
+        document.body.appendChild(rose);
+
+        setTimeout(() => {
+            rose.remove();
+        }, 8000);
+    }
+
+    setInterval(createRose, 300);
+
+
+    // 😈 Move no button
+    function moveButton() {
+        const button = document.getElementById("noBtn");
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        button.style.left = x + "px";
+        button.style.top = y + "px";
+    }
+
+    // 🎆 Confetti when yes
+    function sayYes() {
+        document.getElementById("response").innerHTML = 
+        "YAYYY 😍💖 You just made me the happiest person alive!";
+    
+
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement("div");
+            confetti.style.position = "fixed";
+            confetti.style.width = "10px";
+            confetti.style.height = "10px";
+            confetti.style.backgroundColor = 
+                "hsl(" + Math.random() * 360 + "; 100%; 50%)";
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.top = "-10px";
+            confetti.style.opacity = 0.8;
+            confetti.style.animation = "fall 3s linear forwards";
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
+</script>
+
+</body>
+</html>
